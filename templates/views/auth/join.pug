@@ -1,0 +1,35 @@
+extends ../../layouts/default
+
+block content
+	.container
+		.panel.panel-primary
+			.panel-heading Creating An Account At IncTicket
+			.panel-body
+				.col-md-6
+					form.form-horizontal(action='/join', method='POST')
+						fieldset
+							.form-group.required
+								label.col-md-4.control-label User Name*
+								.col-md-8
+									input#username.form-control(placeholder='Pick a user name', name='username', type='text', value=form.username)
+							.form-group.required
+								label.col-md-4.control-label First Name*
+								.col-md-8
+									input#firstname.form-control(placeholder='First name', name='firstname', type='text', value=form.firstname)
+							.form-group.required
+								label.col-md-4.control-label Last Name*
+								.col-md-8
+									input#lastname.form-control(placeholder='Last name', name='lastname', type='text', value=form.lastname)
+							.form-group.required
+								label.col-md-4.control-label Email Address*
+								.col-md-8
+									input#email.form-control(placeholder='Email address', name='email', type='email', value=form.email)
+							.form-group.required
+								label.col-md-4.control-label Password*
+								.col-md-8
+									input#password.form-control(placeholder='password', name='password', type='password', value=form.password)
+							.form-group
+								label.col-md-4.control-label
+								.col-md-8
+									div(style={ clear: 'both' })
+									button.btn.btn-primary(type='submit') Join

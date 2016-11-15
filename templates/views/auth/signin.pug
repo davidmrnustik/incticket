@@ -1,0 +1,21 @@
+extends ../../layouts/default
+
+block content
+	.container
+		.panel.panel-primary
+			.panel-heading Login to IncTicket
+			.panel-body
+				.col-md-4
+					form(action='/signin', method='POST', role='form')
+						.form-group
+							label.control-label(for='sender-mail') Email address:
+							.input-icon
+								input#signin-email.form-control.email(placeholder='you@mail.com', name='email', type='email', value='')
+						.form-group
+							label.control-label(for='user-pass') Password:
+							.input-icon
+								input#password.form-control(placeholder='Password', name='password', type='password')
+						.form-group
+							input.btn.btn-primary(type='submit', value='Login')
+			.panel-footer
+				a(href='/forgotpassword') Forgot your password?

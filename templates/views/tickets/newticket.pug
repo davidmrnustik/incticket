@@ -1,0 +1,54 @@
+extends ../../layouts/default
+
+block content
+	.container
+		.panel.panel-primary
+			.panel-heading Create a New Ticket
+			.panel-body
+				form.form-horizontal.custom-form(action='/createticket', method='POST')
+					.form-group
+						.col-sm-2.label-column
+							label.control-label(for='name-input-field') Title
+						.col-sm-6.input-column(class=validationErrors ? 'has-error' : '')
+							input.form-control(type='text', name='title', placeholder='Title of the ticket', value=form.title)
+					.form-group
+						.col-sm-2.label-column
+							label.control-label(for='name-input-field') Description
+						.col-sm-6.input-column(class=validationErrors ? 'has-error' : '')
+							textarea.form-control(name='description', placeholder='Describe the issue') #{form.description}
+					.form-group
+						.col-sm-2.label-column
+							label.control-label(for='password-input-field') Priority
+						.col-sm-6.input-column
+							select.form-control(name='priority')
+								option(value='Low', selected=form.priority == 'Low') Low
+								option(value='Medium', selected=form.priority == 'Medium') Medium
+								option(value='High', selected=form.priority == 'High' ) High
+					.form-group
+						.col-sm-2.label-column
+							label.control-label(for='repeat-password-input-field') Category
+						.col-sm-6.input-column
+							select.form-control(name='category')
+								option(value='Bug', selected=form.category == 'Bug') Bug
+								option(value='Feature', selected=form.category == 'Feature') Feature
+								option(value='Enhancement', selected=form.category == 'Enhancement') Enhancement
+					.form-group
+						.col-sm-2.label-column
+							label.control-label(for='repeat-password-input-field') Status
+						.col-sm-6.input-column
+							select.form-control(name='status')
+								option(value='New', selected) New
+								option(value='In Progress') In Progress
+								option(value='Open') Open
+								option(value='On Hold') On Hold
+								option(value='Declined') Declined
+								option(value='Closed') Closed
+					.form-group
+						.col-sm-2.label-column
+							label.control-label(for='repeat-password-input-field') Assigned To
+						.col-sm-6.input-column
+							select.form-control(name='assignedTo')
+								for assignUser in data.users
+									option(value=assignUser.id)= assignUser.fullname
+					input(type='hidden', name='createdBy', value=locals.user._id)
+					input.btn.btn-primary.submit-button(type='submit')

@@ -1,0 +1,22 @@
+extends ../../layouts/default
+
+block content
+	.container: .panel.panel-primary
+		.panel-heading Products
+		.panel-body
+			p These are list of products in the system.
+
+			table.table.table-striped
+				for product in data.products
+					tr: td
+						a.ticket-title(href=product.url): strong #{product.name}
+						ul.ticket-meta
+								li
+									small Team
+									a(href='', rel='tag') #{product.team}
+								li
+									small Created by
+									if product.createdBy
+										a(href='', rel='tag') #{product.createdBy.fullname}
+									else
+										em There is no creator.

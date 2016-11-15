@@ -1,0 +1,41 @@
+extends ../../layouts/default
+
+block content
+	.container: .panel.panel-primary
+		.panel-heading Tickets of tag: #{data.tag.name}
+		.panel-body: p
+			| These are list of tickets in the system.
+
+		table.table.table-striped
+			for ticket in data.tickets
+				tr: td
+					.col-md-1
+						span.label.label-info.pull-left #{ticket.status}
+					a.ticket-title(href=ticket.url): strong #{ticket.title}
+					
+					ul.ticket-meta
+						li
+							small Status
+							a(href='', rel='tag') #{ticket.status}
+						li
+							small Priority
+							a(href='', rel='tag') #{ticket.priority}
+						li
+							small Created by
+							a(href='', rel='tag') #{ticket.createdBy.fullname}
+						li
+							small Assigned to
+							a(href='', rel='tag') #{ticket.assignedTo.fullname}
+						li
+							small Category
+							a(href='', rel='tag') #{ticket.category}
+						li
+							small Last Updated
+							abbr.last-updated #{ticket._.createdAt.format('Do MMMM YYYY')}
+						li
+							small Tags
+							if ticket.tags.length > 0
+								for tag in ticket.tags
+									a(href='/tags/' + tag.name) #{tag.name + " "}
+							else
+								span No tags

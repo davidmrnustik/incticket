@@ -1,0 +1,25 @@
+extends ../../layouts/default
+
+block content
+	.container: .panel.panel-primary
+		.panel-heading= data.product.name
+		.panel-body
+			ul.ticket-meta
+				li
+					small Team
+					a(href='', rel='tag') #{data.product.team}
+				li
+					small Created by
+					if data.product.createdBy
+						a(href='', rel='tag') #{data.product.createdBy.fullname}
+					else
+						em There is no creator.
+			hr
+			h4 Tickets
+			if data.tickets
+				for ticket in data.tickets
+					p
+						a(href=ticket.url)= ticket.title
+						small= "  " + ticket.status
+			else
+				p There is no tickets in this product.

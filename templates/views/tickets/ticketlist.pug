@@ -1,0 +1,78 @@
+extends ../../layouts/default
+
+block content
+	.container: .panel.panel-primary
+		.panel-heading Tickets
+		.panel-body
+			p: a(href='/createticket', class='btn btn btn-primary') Create a new ticket
+			hr
+			p These are list of tickets in the system.
+
+		table.table.table-striped
+			for ticket in data.tickets.results
+				tr: td
+					.col-md-1
+						span.label.label-info.pull-left #{ticket.status}
+					a.ticket-title(href=ticket.url): strong #{ticket.title}
+					
+					ul.ticket-meta
+						li
+							small Status
+							a(href='', rel='tag') #{ticket.status}
+						li
+							small Priority
+							a(href='', rel='tag') #{ticket.priority}
+						li
+							small Created by
+							if ticket.createdBy
+								a(href='', rel='tag') #{ticket.createdBy.fullname}
+							else
+								em There is no creator.
+						li
+							small Assigned to
+							if ticket.assignedTo
+								a(href='', rel='tag') #{ticket.assignedTo.fullname}
+							else
+								em There is no author assigned.
+						li
+							small Category
+							a(href='', rel='tag') #{ticket.category}
+						li
+							small Last Updated
+							span.last-updated #{ticket._.updatedAt.format('MMMM Do YYYY, h:mm:ss a')}
+						li
+							small Product
+							if ticket.product
+								span= ticket.product.name
+							else
+								span There is no product assigned.
+
+
+		.panel-body
+			ul.pagination
+				if data.tickets.totalPages > 1
+					
+					if data.tickets.previous
+						li: a.page-num(href='?page=' + data.tickets.previous) Previous
+					else
+						li: a.page-num(href='?page=1') Previous
+
+					for i, p in data.tickets.pages
+						if p == "..."
+							- var url = ""
+							if i+1 == data.tickets.totalPages
+								- url = 1
+							else
+								- url = p + 1
+						else
+							- url = p + 1
+						li: a.page-num(class=data.tickets.currentPage == p ? '' : 'active', href='?page=' + url) #{p + 1}
+
+					if data.tickets.next
+						li: a.page-num(href='?page=' + data.tickets.next) Next
+					else
+						li: a.page-num(href='?page=' + data.tickets.totalPages) Next
+		
+		.panel-footer
+
+

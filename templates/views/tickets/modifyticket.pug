@@ -1,0 +1,54 @@
+extends ../../layouts/default
+
+block content
+	.container
+		.panel.panel-primary
+			.panel-heading Edit a ticket
+			.panel-body
+				form.form-horizontal.custom-form(action='/modifyticket', method='POST')
+					.form-group
+						.col-sm-2.label-column
+							label.control-label(for='name-input-field') Title
+						.col-sm-6.input-column(class=validationErrors ? 'has-error' : '')
+							input.form-control(type='text', name='title', placeholder='Title of the ticket', value=data.ticket.title)
+					.form-group
+						.col-sm-2.label-column
+							label.control-label(for='name-input-field') Description
+						.col-sm-6.input-column(class=validationErrors ? 'has-error' : '')
+							textarea.form-control(name='description', placeholder='Describe the issue') #{data.ticket.description}
+					.form-group
+						.col-sm-2.label-column
+							label.control-label(for='password-input-field') Priority
+						.col-sm-6.input-column
+							select.form-control(name='priority')
+								option(value='Low', selected=data.ticket.priority == 'Low') Low
+								option(value='Medium', selected=data.ticket.priority == 'Medium') Medium
+								option(value='High', selected=data.ticket.priority == 'High' ) High
+					.form-group
+						.col-sm-2.label-column
+							label.control-label(for='repeat-password-input-field') Category
+						.col-sm-6.input-column
+							select.form-control(name='category')
+								option(value='Bug', selected=data.ticket.category == 'Bug') Bug
+								option(value='Feature', selected=data.ticket.category == 'Feature') Feature
+								option(value='Enhancement', selected=data.ticket.category == 'Enhancement') Enhancement
+					.form-group
+						.col-sm-2.label-column
+							label.control-label(for='repeat-password-input-field') Status
+						.col-sm-6.input-column
+							select.form-control(name='status')
+								option(value='New', selected=data.ticket.status == 'New') New
+								option(value='In Progress', selected=data.ticket.status == 'In Progress') In Progress
+								option(value='Open', selected=data.ticket.status == 'Open') Open
+								option(value='On Hold', selected=data.ticket.status == 'On Hold') On Hold
+								option(value='Declined', selected=data.ticket.status == 'Declined') Declined
+								option(value='Closed', selected=data.ticket.status == 'Closed') Closed
+					.form-group
+						.col-sm-2.label-column
+							label.control-label(for='repeat-password-input-field') Assigned To
+						.col-sm-6.input-column
+							select.form-control(name='assignedTo')
+								for assignUser in data.users
+									option(value=assignUser.id, selected=data.ticket.assignedTo.id == assignUser.id)= assignUser.fullname
+					input(type='hidden', name='id', value=data.ticket.id)
+					input.btn.btn-primary.submit-button(type='submit')
