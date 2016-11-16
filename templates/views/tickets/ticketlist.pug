@@ -15,37 +15,7 @@ block content
 						span.label.label-info.pull-left #{ticket.status}
 					a.ticket-title(href=ticket.url): strong #{ticket.title}
 					
-					ul.ticket-meta
-						li
-							small Status
-							a(href='', rel='tag') #{ticket.status}
-						li
-							small Priority
-							a(href='', rel='tag') #{ticket.priority}
-						li
-							small Created by
-							if ticket.createdBy
-								a(href='', rel='tag') #{ticket.createdBy.fullname}
-							else
-								em There is no creator.
-						li
-							small Assigned to
-							if ticket.assignedTo
-								a(href='', rel='tag') #{ticket.assignedTo.fullname}
-							else
-								em There is no author assigned.
-						li
-							small Category
-							a(href='', rel='tag') #{ticket.category}
-						li
-							small Last Updated
-							span.last-updated #{ticket._.updatedAt.format('MMMM Do YYYY, h:mm:ss a')}
-						li
-							small Product
-							if ticket.product
-								span= ticket.product.name
-							else
-								span There is no product assigned.
+					+ticket(ticket)
 
 
 		.panel-body

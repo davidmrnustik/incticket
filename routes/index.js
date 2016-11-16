@@ -29,6 +29,7 @@ keystone.pre('render', middleware.flashMessages);
 // Import Route Controllers
 var routes = {
 	views: importRoutes('./views'),
+	api: importRoutes('./api'),
 };
 
 // Setup Route Bindings
@@ -50,6 +51,11 @@ exports = module.exports = function (app) {
 	app.all('/resetpassword/:key', keystone.security.csrf.middleware.init, routes.views.auth.resetpassword);
 	app.post('resetpassword', keystone.security.csrf.middleware.validate, routes.views.auth.resetpassword);
 	app.get('/search', routes.views.tickets.search);
+	app.get('/api/tickets', keystone.middleware.api, routes.api.ticket.getTickets);
+	app.get('/api/tickets/:id', keystone.middleware.api, routes.api.ticket.getTicketById);
+	app.post('/api/tickets', keystone.middleware.api, routes.api.ticket.createTicket);
+	app.put('/api/tickets/:id', keystone.middleware.api, routes.api.ticket.updateTicketById);
+	app.delete('/api/tickets/:id', keystone.middleware.api, routes.api.ticket.deleteTicketById);
 
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);

@@ -1,0 +1,39 @@
+mixin ticket(data)
+	ul.ticket-meta
+		li
+			small Status
+			a(href='', rel='tag') #{data.status}
+		li
+			small Priority
+			a(href='', rel='tag') #{data.priority}
+		li
+			small Created by
+			if data.createdBy
+				a(href='', rel='tag') #{data.createdBy.fullname}
+			else
+				em There is no creator.
+		li
+			small Assigned to
+			if data.assignedTo
+				a(href='', rel='tag') #{data.assignedTo.fullname}
+			else
+				em There is no author assigned.
+		li
+			small Category
+			a(href='', rel='tag') #{data.category}
+		li
+			small Last Updated
+			span.last-updated #{data._.updatedAt.format('MMMM Do YYYY, h:mm:ss a')}
+		li
+			small Tags
+			if data.tags.length > 0
+				for tag in data.tags
+					a(href='/tags/' + tag.name) #{tag.name + " "}
+			else
+				span No tags
+		li
+			small Product
+			if data.product
+				span= data.product.name
+			else
+				span No product assigned.

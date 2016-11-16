@@ -6,39 +6,9 @@ block content
 		.panel-body
 			span.label.label-info.pull-right #{data.ticket.status}
 			p.ticket-title #{data.ticket.description}
+			p= data.ticket.description.indexOf("critical") > -1 ? "This is critical ticket!" : ""
 
-			ul.ticket-meta
-				li
-					small Status
-					a(href='', rel='tag') #{data.ticket.status}
-				li
-					small Priority
-					a(href='', rel='tag') #{data.ticket.priority}
-				li
-					small Category
-					a(href='', rel='tag') #{data.ticket.category}
-				li
-					small Last Updated
-					abbr.last-updated #{data.ticket._.updatedAt.format('MMMM Do YYYY, h:mm:ss a')}
-				li
-					small Created by
-					if data.ticket.createdBy
-						a(href='', rel='tag') #{data.ticket.createdBy.fullname}
-					else
-						em There is no creator.
-				li
-					small Assigned to
-					if data.ticket.assignedTo
-						a(href='', rel='tag') #{data.ticket.assignedTo.fullname}
-					else
-						em There is no author assigned.
-				li
-					small Tags
-					if data.ticket.tags.length > 0
-						for tag in data.ticket.tags
-							a(href='/tags/' + tag.name) #{tag.name + " "}
-					else
-						span No tags
+			+ticket(data.ticket)
 
 		if data.ticket.similarTicket
 			.panel-footer
