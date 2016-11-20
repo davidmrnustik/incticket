@@ -22,7 +22,7 @@ Product.defaultSort = '-title';
 Product.defaultColumns = 'title|20%, team, publishedStatus, createdBy';
 
 Product.schema.virtual('url').get(function(){
-	return '/products/' + this.slug;
+	return '/projects/' + this.slug;
 })
 
 Product.register();

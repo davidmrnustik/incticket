@@ -37,8 +37,8 @@ exports = module.exports = function (app) {
 	// Views
 	app.get('/', routes.views.index);
 	app.get('/tickets', routes.views.tickets.ticketlist);
-	app.get('/products', routes.views.products.productlist);
-	app.get('/products/:productslug', routes.views.products.singleproduct);
+	app.get('/projects', routes.views.products.productlist);
+	app.get('/projects/:productslug', routes.views.products.singleproduct);
 	app.get('/tickets/:ticketslug', routes.views.tickets.singleticket);
 	app.get('/mytickets', routes.views.tickets.mytickets);
 	app.get('/tags/:tag', routes.views.tickets.tagtickets);

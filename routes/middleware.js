@@ -21,7 +21,7 @@ exports.initLocals = function (req, res, next) {
 	res.locals.navLinks = [
 		{ label: 'Home', key: 'home', href: '/' },
 		{ label: 'Tickets', key: 'tickets', href: '/tickets' },
-		{ label: 'Products', key: 'products', href: '/products' },
+		{ label: 'Projects', key: 'products', href: '/projects' },
 	];
 	res.locals.user = req.user;
 	res.locals.host = 'http://localhost:3000';
