@@ -1,0 +1,17 @@
+extends ../../layouts/default
+
+block content
+	.container: .panel.panel-primary
+		.panel-heading My tickets
+		.panel-body
+			p These are tickets created by #{data.user.fullname}
+
+		table.table.table-striped
+			for ticket in data.tickets
+				tr: td
+					.col-md-1
+						span.label.label-info.pull-left #{ticket.status}
+					a.ticket-title(href=ticket.url): strong #{ticket.title}
+					
+					+ticket(ticket)
+		.panel-footer

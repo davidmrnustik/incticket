@@ -50,5 +50,15 @@ block content
 							select.form-control(name='assignedTo')
 								for assignUser in data.users
 									option(value=assignUser.id, selected=data.ticket.assignedTo.id == assignUser.id)= assignUser.fullname
+					.form-group
+						.col-sm-2.label-column
+							label.control-label(for='product') Project
+						.col-sm-6.input-column
+							select.form-control(name='product')
+								for product in data.products
+									if data.ticket.product
+										option(value=product.id, selected=data.ticket.product.id == product.id)= product.name
+									else
+										option(value=product.id)= product.name
 					input(type='hidden', name='id', value=data.ticket.id)
 					input.btn.btn-primary.submit-button(type='submit')

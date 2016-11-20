@@ -11,13 +11,9 @@ exports = module.exports = function(req, res){
 	};
 
 	view.on('init', function(next){
-		var q = keystone.list('Product').model.find().select('name team slug');
+		var q = keystone.list('Product').model.find().select('name team slug createdBy').where('publishedStatus').in(['published']).populate('createdBy');
 		q.exec(function(err, results){
-			if(results != null){
-				locals.data.products = results;
-			} else {
-				return res.status(404).send(keystone.wrapHTMLError("Sorry, no products found! (404)"))
-			}
+			locals.data.products = results;
 			next(err);			
 		})
 	})

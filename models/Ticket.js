@@ -3,6 +3,7 @@ var Types = keystone.Field.Types;
 
 var Ticket = new keystone.List('Ticket', {
 	autokey: { from: 'title', path: 'slug', unique: true},
+	map: { name: 'title' },
 	searchFields: 'description',
 	track: { updatedAt: true}
 });
@@ -10,6 +11,7 @@ var Ticket = new keystone.List('Ticket', {
 Ticket.add({
 	title: { type: String, initial: true, default: '', required: true },
 	description: { type: Types.Textarea },
+	slug: { type: String },
 	product: { type: Types.Relationship, ref: 'Product', index: true, default: "", many: false},
 	priority: { type: Types.Select, options: 'Low, Medium, High', default: 'Low' },
 	category: { type: Types.Select, options: 'Bug, Feature, Enhancement', default: 'Bug' },
@@ -23,7 +25,7 @@ Ticket.add({
 });
 
 Ticket.defaultSort = '-createdAt';
-Ticket.defaultColumns = 'title|20%, status|15%, createdBy, assignedTo, createdAt';
+Ticket.defaultColumns = 'title|20%, status|15%, createdBy, assignedTo, createdAt, product';
 
 Ticket.schema.virtual('url').get(function(){
 	return '/tickets/' + this.slug;

@@ -16,7 +16,7 @@ exports = module.exports = function(req, res){
 		console.log('search keywords=' + locals.filters.keywords);
 		locals.data.keywords = locals.filters.keywords;
 
-		keystone.list('Ticket').model.find({$text: { $search: locals.filters.keywords} }, { score: { $meta: "textScore" } }).sort({score: { $meta: "textScore" } }).limit(20).exec(function(err, results){
+		keystone.list('Ticket').model.find({$text: { $search: locals.filters.keywords} }, { score: { $meta: "textScore" } }).sort({score: { $meta: "textScore" } }).limit(20).populate('createdBy assignedTo').exec(function(err, results){
 			if(err){
 				console.log(err)
 			}

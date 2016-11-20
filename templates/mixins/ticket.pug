@@ -9,13 +9,13 @@ mixin ticket(data)
 		li
 			small Created by
 			if data.createdBy
-				a(href='', rel='tag') #{data.createdBy.fullname}
+				p= data.createdBy.fullname
 			else
 				em There is no creator.
 		li
 			small Assigned to
 			if data.assignedTo
-				a(href='', rel='tag') #{data.assignedTo.fullname}
+				p= data.assignedTo.fullname
 			else
 				em There is no author assigned.
 		li
@@ -32,7 +32,7 @@ mixin ticket(data)
 			else
 				span No tags
 		li
-			small Product
+			small Project
 			if data.product
 				span= data.product.name
 			else

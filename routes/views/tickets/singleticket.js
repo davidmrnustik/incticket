@@ -11,7 +11,7 @@ exports = module.exports = function(req, res){
 	};
 
 	view.on('init', function(next){
-		var q = keystone.list('Ticket').model.findOne({ slug: req.params.ticketslug }).populate('assignedTo createdBy tags similarTicket');
+		var q = keystone.list('Ticket').model.findOne({ slug: req.params.ticketslug }).populate('assignedTo createdBy tags similarTicket product');
 		q.exec(function(err, result){
 			if(result != null){
 				locals.data.ticket = result;

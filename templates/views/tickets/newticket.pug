@@ -50,5 +50,12 @@ block content
 							select.form-control(name='assignedTo')
 								for assignUser in data.users
 									option(value=assignUser.id)= assignUser.fullname
+					.form-group
+						.col-sm-2.label-column
+							label.control-label(for='project') Project
+						.col-sm-6.input-column
+							select.form-control(name='product')
+								for product in data.products
+									option(value=product.id)= product.name
 					input(type='hidden', name='createdBy', value=locals.user._id)
 					input.btn.btn-primary.submit-button(type='submit')

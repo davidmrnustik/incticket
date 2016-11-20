@@ -7,7 +7,8 @@ exports = module.exports = function(req, res){
 
 	locals.form = req.body;
 	locals.data = {
-		users: []
+		users: [],
+		products: []
 	};
 
 	view.on('init', function(next){
@@ -18,6 +19,13 @@ exports = module.exports = function(req, res){
 		});
 	});
 
+	view.on('init', function(next){
+		var q = keystone.list('Product').model.find();
+		q.exec(function(err, results){
+			locals.data.products = results;
+			next(err);
+		})
+	})
 
 	view.on('post', function(next){
 		var newTicket = new Ticket.model(),

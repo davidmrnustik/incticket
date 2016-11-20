@@ -40,6 +40,7 @@ exports = module.exports = function (app) {
 	app.get('/products', routes.views.products.productlist);
 	app.get('/products/:productslug', routes.views.products.singleproduct);
 	app.get('/tickets/:ticketslug', routes.views.tickets.singleticket);
+	app.get('/mytickets', routes.views.tickets.mytickets);
 	app.get('/tags/:tag', routes.views.tickets.tagtickets);
 	app.all('/createticket', middleware.requireUser, routes.views.tickets.newticket);
 	app.all('/modifyticket/:ticket?', middleware.requireUser, routes.views.tickets.modifyticket);

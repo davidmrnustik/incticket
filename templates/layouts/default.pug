@@ -58,7 +58,7 @@ html
 								li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
 						form.navbar-form.navbar-left(role='search', action='/search', method='GET')
 							.form-group
-								input#keywords.form-control(type='text', name='keywords', placeholder='Search fot tickets')
+								input#keywords.form-control(type='text', name='keywords', placeholder='Search for tickets')
 								button.btn.btn-default(type='submit') Search
 						ul.nav.navbar-nav.navbar-right
 							if user

@@ -8,7 +8,8 @@ exports = module.exports = function(req, res){
 	locals.form = req.body;
 	locals.data = {
 		users: [],
-		ticket: []
+		ticket: [],
+		products: []
 	};
 
 	view.on('init', function(next){
@@ -18,6 +19,14 @@ exports = module.exports = function(req, res){
 			next(err);
 		});
 	});
+
+	view.on('init', function(next){
+		var q = keystone.list('Product').model.find();
+		q.exec(function(err, results){
+			locals.data.products = results;
+			next(err);
+		})
+	})
 
 	view.on('init', function(next){
 		keystone.list('Ticket').model.findOne({ slug: req.params.ticket }).populate('assignedTo').exec(function(err, results){
