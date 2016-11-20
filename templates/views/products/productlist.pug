@@ -4,7 +4,7 @@ block content
 	.container: .panel.panel-primary
 		.panel-heading Products
 		.panel-body
-			if data.products
+			if data.products.length > 0
 				p These are list of products in the system.
 
 				table.table.table-striped
