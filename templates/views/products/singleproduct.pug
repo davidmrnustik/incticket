@@ -16,10 +16,10 @@ block content
 						em There is no creator.
 			hr
 			h4 Tickets
-			if data.tickets
+			if data.tickets.length > 0
 				for ticket in data.tickets
 					p
 						a(href=ticket.url)= ticket.title
 						small= "  " + ticket.status
 			else
-				p There is no tickets in this product.
+				p There are no tickets in this project.
