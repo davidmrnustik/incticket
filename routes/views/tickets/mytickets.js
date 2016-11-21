@@ -12,7 +12,7 @@ exports = module.exports = function(req, res){
 	}
 
 	view.on('init', function(next){
-		var q = keystone.list('Ticket').model.find( { assignedTo: req.user} ).populate('assignedTo createdBy product');
+		var q = keystone.list('Ticket').model.find( { assignedTo: req.user} ).populate('assignedTo createdBy product tags');
 		q.exec(function(err, results){
 			locals.data.tickets = results;
 			next(err);
