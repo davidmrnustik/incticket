@@ -3,6 +3,7 @@ var Types = keystone.Field.Types;
 
 var Product = new keystone.List('Product', {
 	autokey: { from: 'name', path: 'slug', unique: true},
+  map: { name: 'name' }
 });
 
 Product.add({
@@ -18,8 +19,8 @@ Product.schema.virtual('fulltitle').get(function(){
 
 Product.relationship({ ref: 'Ticket', refPath: 'product', path: 'productticket'});
 
-Product.defaultSort = '-title';
-Product.defaultColumns = 'title|20%, team, publishedStatus, createdBy';
+Product.defaultSort = '-name';
+Product.defaultColumns = 'name|20%, team, publishedStatus, createdBy';
 
 Product.schema.virtual('url').get(function(){
 	return '/projects/' + this.slug;
