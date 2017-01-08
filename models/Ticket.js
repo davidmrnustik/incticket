@@ -5,7 +5,7 @@ var Ticket = new keystone.List('Ticket', {
 	autokey: { from: 'title', path: 'slug', unique: true},
 	map: { name: 'title' },
 	searchFields: 'description',
-	track: { updatedAt: true}
+	track: { updatedAt: false },
 });
 
 Ticket.add({
